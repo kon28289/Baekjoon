@@ -1,0 +1,11 @@
+-- 코드를 작성해주세요
+SELECT iif.ITEM_ID, iif.ITEM_NAME, iif.RARITY
+FROM ITEM_INFO ii
+JOIN ITEM_TREE it
+    ON ii.ITEM_ID = it.PARENT_ITEM_ID
+JOIN ITEM_INFO iif
+    ON it.ITEM_ID = iif.ITEM_ID
+WHERE ii.RARITY = 'RARE'
+ORDER BY iif.ITEM_ID DESC
+
+
