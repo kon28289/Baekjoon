@@ -1,0 +1,18 @@
+-- 코드를 입력하세요
+WITH RECURSIVE TIMES as (
+    SELECT 0 as 'NUM'
+    
+    UNION ALL
+    
+    SELECT NUM + 1
+    FROM TIMES
+    WHERE NUM < 23
+)
+
+SELECT 
+    t.NUM as 'HOUR',
+    COALESCE(COUNT(ao.ANIMAL_ID), 0) as 'COUNT'
+FROM TIMES t
+LEFT JOIN ANIMAL_OUTS ao ON HOUR(ao.DATETIME) = t.NUM
+GROUP BY t.NUM
+ORDER BY t.NUM
