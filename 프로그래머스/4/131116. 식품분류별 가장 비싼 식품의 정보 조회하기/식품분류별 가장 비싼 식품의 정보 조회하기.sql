@@ -1,0 +1,13 @@
+-- 코드를 입력하세요
+SELECT a.CATEGORY, a.PRICE as 'MAX_PRICE', a.PRODUCT_NAME
+FROM (
+    SELECT 
+        PRODUCT_NAME,
+        CATEGORY,
+        PRICE,
+        ROW_NUMBER() OVER(PARTITION BY CATEGORY ORDER BY PRICE DESC) as RN
+    FROM FOOD_PRODUCT f
+) a
+WHERE a.CATEGORY IN ('과자', '국', '김치', '식용유') 
+    AND a.RN = 1
+ORDER BY a.PRICE DESC
