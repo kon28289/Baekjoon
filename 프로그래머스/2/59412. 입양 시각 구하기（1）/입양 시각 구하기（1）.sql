@@ -1,0 +1,14 @@
+-- 코드를 입력하세요
+WITH RECURSIVE times as (
+    SELECT 9 as 'HOUR'
+    
+    UNION ALL
+    SELECT HOUR + 1
+    FROM times
+    WHERE HOUR + 1< 20
+)
+
+SELECT t.HOUR, COALESCE(COUNT(o.DATETIME), 0) as 'COUNT'
+FROM times t
+LEFT JOIN ANIMAL_OUTS o ON HOUR(o.DATETIME) = t.HOUR
+GROUP BY t.HOUR
