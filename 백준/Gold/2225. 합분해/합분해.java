@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        int[][] dp = new int[K + 1][N + 1];
+
+        for (int k = 1; k <= K; k++) {
+            dp[k][0] = 1;
+        }
+
+        for (int n = 0; n <= N; n++) {
+            dp[1][n] = 1;
+        }
+
+        for (int k = 2; k <= K; k++) {
+            for (int n = 1; n <= N; n++) {
+                dp[k][n] = (dp[k][n - 1] + dp[k - 1][n]) % 1000000000;
+            }
+        }
+
+        System.out.println(dp[K][N]);
+    }
+
+}
